@@ -36,20 +36,18 @@ public class Ulam {
     }
 
     private static int getInput(Scanner scanner){
-
-        System.out.print("Enter any positive integer: ");
-        try{
-            int n = scanner.nextInt();
-            if (n < 0){
-                throw new InputMismatchException();
-            }else{
-                return n;
+        while (true) {
+            System.out.print("Enter any positive integer: ");
+            try {
+                int n = scanner.nextInt();
+                if (n < 0) {
+                    throw new InputMismatchException();
+                } else {
+                    return n;
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("Please enter a positive integer: ");
             }
-        }catch (InputMismatchException e) {
-            System.out.println("Please enter a positive integer");
-            // Clear invalid input
-            scanner.next();
         }
-        return 0;
     }
 }
