@@ -23,7 +23,9 @@
 4. Repeat steps 2 and 3 with the resulting number.
    terminates with 1 for any given positive integer n<1M.
 
-### 3. Create a github.com account and commit your software to a new repository.
+*Look Ulam.java file*
+
+### 3. Create a gitHub.com account and commit your software to a new repository.
 https://github.com/dariacherepina/Software-Engineering-Design-SoSe-25.git
 
 ### 4. Please install the MagicDraw UML Editor on your computer 
@@ -35,7 +37,7 @@ https://github.com/dariacherepina/Software-Engineering-Design-SoSe-25.git
 ### 5. Draw a UML class diagram for a class developer with at least 5 suitable attributes and 5 methods. 
 Draw an object diagram with corresponding values for yourself. Implement this class in Java with integrity checks in the setter methods.
 ![img_2.png](img_2.png)
-
+*Look into Developer.java file* 
 
 ### 6. Define the term software design. Explain how this differs from software analysis. 
 The design phase of software development deals with transforming the customer requirements as described in the SRS documents into a form implementable using a programming language.

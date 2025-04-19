@@ -21,11 +21,12 @@ public class Developer {
     }
 
     public String generateProfileSummary(){
-        return  String.format("Developer Profile:\n" +
-                              "Name: %s %s\n" +
-                              "Email: %s\n" +
-                              "Experience: %.1f years\n" +
-                              "Languages: %s",
+        return  String.format("""
+                        Developer Profile:
+                        Name: %s %s
+                        Email: %s
+                        Experience: %.1f years
+                        Languages: %s""",
                 firstName, lastName, email, yearsOfExperience, programmingLanguages);
     }
 
