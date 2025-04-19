@@ -11,7 +11,7 @@ public class Ulam {
         it provides automatic resource cleanup aka closes scanner
         and this way I can use scanner in getInput function without closing it there
         */
-        try(Scanner scanner = new Scanner(System.in);){
+        try(Scanner scanner = new Scanner(System.in)){
             int n = getInput(scanner);
             int result = ulam(n);
             System.out.println(result);
