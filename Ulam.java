@@ -20,7 +20,7 @@ public class Ulam {
     }
     private static int ulam(int n){
         int iterations = 1000000;
-        while(n < iterations){
+        for (int i = 0; i < iterations; i++){
             if(n == 1) {
                 System.out.println("Done");
                 return 1;
