@@ -23,6 +23,13 @@
 4. Repeat steps 2 and 3 with the resulting number.
    terminates with 1 for any given positive integer n<1M.
 
+
+### 4. Please install the MagicDraw UML Editor on your computer 
+
+![img_1.png](img_1.png)
+
+*I also have Magic Draw installed on my laptop, but I would rather work in drawio.*
+
 ### 6. Define the term software design. Explain how this differs from software analysis. 
 The design phase of software development deals with transforming the customer requirements as described in the SRS documents into a form implementable using a programming language.
 Software design describes how the software system is decomposed and organized into components and modules. It defines the relationship between these modules through interfaces. A good design makes the software understandable, modifiable, reliable and reusable.

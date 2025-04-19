@@ -6,16 +6,21 @@ public class Ulam {
 
 
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+        /*
+        scanner is here because:
+        it provides automatic resource cleanup aka closes scanner
+        and this way I can use scanner in getInput function without closing it there
+        */
+        try(Scanner scanner = new Scanner(System.in);){
+            int n = getInput(scanner);
+            int result = ulam(n);
+            System.out.println(result);
+        }
 
-        System.out.print("Enter any positive integer: ");
-        int n = scanner.nextInt();
-        int result = ulam(n);
-        System.out.println(result);
     }
     private static int ulam(int n){
-
-        while(n < 1000000){
+        int iterations = 1000000;
+        while(n < iterations){
             if(n == 1) {
                 System.out.println("Done");
                 return 1;
@@ -27,9 +32,24 @@ public class Ulam {
                 System.out.println("Odd:" + n);
             }
         }
-
-
         return n;
     }
 
+    private static int getInput(Scanner scanner){
+
+        System.out.print("Enter any positive integer: ");
+        try{
+            int n = scanner.nextInt();
+            if (n < 0){
+                throw new InputMismatchException();
+            }else{
+                return n;
+            }
+        }catch (InputMismatchException e) {
+            System.out.println("Please enter a positive integer");
+            // Clear invalid input
+            scanner.next();
+        }
+        return 0;
+    }
 }
