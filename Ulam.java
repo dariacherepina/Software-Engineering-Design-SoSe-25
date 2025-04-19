@@ -22,7 +22,7 @@ public class Ulam {
         int iterations = 1000000;
         for (int i = 0; i < iterations; i++){
             if(n == 1) {
-                System.out.println("Done");
+                System.out.println("Done at the iteration " + i);
                 return 1;
             }else if (n % 2 == 0){
                 n = n/2;
