@@ -78,12 +78,24 @@ Software design describes how the software system is decomposed and organized in
 
 - **Collaboration and Communication**: A design document or diagram helps developers, project managers, stakeholders, and other team members understand the project’s goals and progress. It fosters better collaboration, ensuring that everyone is aligned on the project’s architecture and objectives.
 
+
 - **Consistency and Quality**: Design ensures that the software adheres to quality standards and best practices, such as modularity, simplicity, and scalability. It helps in maintaining consistency in coding style, system architecture, and design patterns, which is crucial for larger projects or teams.
 
 
 - **User Experience (UX)**: A well-designed system accounts for user requirements and ensures that the software is user-friendly. Design decisions can have a significant impact on how intuitive and efficient the final product is for users.
 
-I think the lack of software design could bring to produsing low-quality product as well as not meeting the criteria for the product at all, as for the lack of planning
+
+*I think indeed that there were enough projects, that were made without software design, but I don't think one could call them the most successful or efficient ones.
+The lack of proper software design would lead to many technical problems such as:*
+
+- Poor system architecture leading to maintenance problems
+- Integration challenges causing development delays
+- Performance issues affecting user experience
+- Security vulnerabilities requiring emergency patches
+- Development delays due to constant rework and constant miscommunication as there would be no one design to follow
+- Higher likelihood of project abandonment
+- Significant cost overruns from rework and fixes
+- Loss of customer trust due to poor performance
 
 ### 8. Are the design activities of architectural design, database design, user interface design and component design independent or interdependent? Using an example, explain why. 
 
