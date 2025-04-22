@@ -83,6 +83,7 @@ Software design describes how the software system is decomposed and organized in
 
 - **User Experience (UX)**: A well-designed system accounts for user requirements and ensures that the software is user-friendly. Design decisions can have a significant impact on how intuitive and efficient the final product is for users.
 
+I think the lack of software design could bring to produsing low-quality product as well as not meeting the criteria for the product at all, as for the lack of planning
 
 ### 8. Are the design activities of architectural design, database design, user interface design and component design independent or interdependent? Using an example, explain why. 
 
