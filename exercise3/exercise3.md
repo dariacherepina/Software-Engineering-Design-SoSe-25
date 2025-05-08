@@ -37,6 +37,16 @@ https://drive.google.com/file/d/1WIX7i4dUR_-jsKDzNALM21SidxNKzSat/view?usp=shari
    responsible class for a method. Describe how to find the responsible class for the
    creation of an object.
 
+To find the responsible class for the creation of an object, I would do the following:
+
+First of all, I'd search for the class that contains the initializing data, or closely uses the created object.
+After that if class holds the data needed to initialize the new object, it should be responsible for creating it.
+But don't forget to  pay attention that while assigning responsibility to a class that results would need to be in low coupling and high cohesion to maintain good system design.
+
+Key GRASP Alignment: Creator + Low Coupling + High Cohesion
+
+/*
+Comments for me 
 ### Information expert:
 Where to assign responsibilities to classes?
 
@@ -56,6 +66,7 @@ class. Controllers act as intermediaries between the user interface and the busi
 logic (see also MVC)
 
 
+*/
 
 3. Create CRC cards for the classes designed in 1. Please reiterate your model and
    use the Controller and Expert principle. Did you change the responsibility for any
