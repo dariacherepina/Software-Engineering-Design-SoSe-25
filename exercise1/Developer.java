@@ -1,3 +1,5 @@
+/*package exercise1;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,7 +10,7 @@ public class Developer {
     private double yearsOfExperience;
     private List<String> programmingLanguages;
 
-    public Developer(String firstName, String lastName, String email, double yearsOfExperience, List<String> programmingLanguages) {
+    public exercise1.Developer(String firstName, String lastName, String email, double yearsOfExperience, List<String> programmingLanguages) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -80,3 +82,4 @@ public class Developer {
         System.out.println(daria.generateProfileSummary());
     }
 }
+*/
