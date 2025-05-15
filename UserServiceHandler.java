@@ -1,7 +1,5 @@
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
-import java.util.Set;
 
 public class UserServiceHandler {
     private static HashMap<String, User> userList = new HashMap();
@@ -82,7 +80,7 @@ public class UserServiceHandler {
     }
 
     public static void followSubscriptions(User currentUser){
-        HashMap<String, Subscribtion> currentSubscriptions = currentUser.getSubscriptionList();
+        HashMap<String, Subscription> currentSubscriptions = currentUser.getSubscriptionList();
         System.out.println("Starting notifications for your subscriptions:");
         for (String websiteName : currentSubscriptions.keySet()) {
             Website currentWebsite = currentSubscriptions.get(websiteName).getWebsite();
@@ -160,7 +158,7 @@ public class UserServiceHandler {
                         System.out.println("Subscription was canceled successfully");
                     }
                     case "3" -> {
-                        HashMap<String, Subscribtion> currentSubscriptions = currentUser.getSubscriptionList();
+                        HashMap<String, Subscription> currentSubscriptions = currentUser.getSubscriptionList();
                         System.out.println(currentSubscriptions.keySet());
                     }
                     case "4" -> {

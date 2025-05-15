@@ -1,6 +1,4 @@
-import java.util.Date;
 import java.util.HashMap;
-import java.util.Scanner;
 
 
 public class User {
@@ -8,7 +6,7 @@ public class User {
     private int userID;
     private String name;
     private String password;
-    private HashMap<String, Subscribtion> subscriptionList;
+    private HashMap<String, Subscription> subscriptionList;
 
     public User(String name, String password) {
         this.userID = ++idCounter;
@@ -18,7 +16,7 @@ public class User {
     }
 
     public void addSubscription(Website website, Notification note){
-        Subscribtion subscription = new Subscribtion(website, note);
+        Subscription subscription = new Subscription(website, note);
         subscriptionList.put(website.getWebsiteName(), subscription);
         //System.out.println(subscriptionList);
     }
@@ -44,10 +42,10 @@ public class User {
         return password;
     }
 
-    public HashMap<String, Subscribtion> getSubscriptionList() {
+    public HashMap<String, Subscription> getSubscriptionList() {
         return subscriptionList;
     }
-    public Subscribtion getSubscription(String websiteName) {
+    public Subscription getSubscription(String websiteName) {
         return subscriptionList.get(websiteName);
     }
 
