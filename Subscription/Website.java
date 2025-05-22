@@ -1,3 +1,5 @@
+package Subscription;
+
 import java.time.LocalDate;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -18,7 +20,7 @@ public class Website {
 
     @Override
     public String toString() {
-        return "Website{" +
+        return "Subscription.Subscription.Website{" +
                 "websiteName='" + websiteName + '\'' +
                 ", urlString='" + urlString + '\'' +
                 ", lastCheckedDate=" + lastCheckedDate +
@@ -70,9 +72,9 @@ public class Website {
                     compareContent.append(inputLine).append("\n");
                 }
                 if(compareContent.toString().equals(content.toString())){
-                    return "Website didn't change. No updates :)";
+                    return "Subscription.Subscription.Website didn't change. No updates :)";
                 }else{
-                    return "Website changed! Go ahead and check the updates";
+                    return "Subscription.Subscription.Website changed! Go ahead and check the updates";
                 }
             }
         } catch (IOException e) {

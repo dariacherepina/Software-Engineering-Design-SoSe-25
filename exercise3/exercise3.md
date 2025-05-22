@@ -14,14 +14,14 @@ Classes:
    UserServices,
    User,
    Update,
-   Website (URL),
-   Notification (Preference, Frequency, Communication channel),
-   Subscription
+   Subscription.Subscription.Website (URL),
+   Subscription.Subscription.Subscription.Subscription.Notification (Preference, Frequency, Communication channel),
+   Subscription.Subscription
 
 Methods:
    register
    provide URL
-   monitor Website
+   monitor Subscription.Subscription.Website
    generates a notification
    delivers it
 
@@ -74,9 +74,9 @@ logic (see also MVC)
 
 Yes, I indeed changed the responsibility for multiple methods, as for example: 
 - registerUser(): User - before it was in User class
-- addSubscribtions(): subscriptionCatalog - before it was in Subscription class
-- cancelSubscribtions(): subscriptionCatalog - before it was in Subscription class
-- and afterward I completely redid notification logic: added Interface, added SMS and Email class and deleted single Notification class 
+- addSubscribtions(): subscriptionCatalog - before it was in Subscription.Subscription class
+- cancelSubscribtions(): subscriptionCatalog - before it was in Subscription.Subscription class
+- and afterward I completely redid notification logic: added Interface, added SMS and Email class and deleted single Subscription.Subscription.Subscription.Subscription.Notification class 
 
 
 I as well uploaded crc cards to the drawio in google, where you can find it in a better resolution as screenshots here.

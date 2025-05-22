@@ -1,28 +1,19 @@
+import Subscription.Observer;
 import java.util.HashMap;
+import java.util.Observable;
 
-
-public class User {
+public class User implements Observer {
     private static int idCounter = 0;
     private int userID;
     private String name;
     private String password;
-    private HashMap<String, Subscription> subscriptionList;
+    private HashMap<String, String> subscriptionList = new HashMap<>();
 
     public User(String name, String password) {
         this.userID = ++idCounter;
         this.name = name;
         this.password = password;
-        this.subscriptionList = new HashMap<>();
-    }
-
-    public void addSubscription(Website website, Notification note){
-        Subscription subscription = new Subscription(website, note);
-        subscriptionList.put(website.getWebsiteName(), subscription);
-        //System.out.println(subscriptionList);
-    }
-    public void cancelSubscription(String websiteName){
-        subscriptionList.remove(websiteName);
-        //System.out.println(subscriptionList);
+        //this.subscriptionList = new HashMap<>();
     }
 
     @Override
@@ -30,23 +21,33 @@ public class User {
         return "Name: " + name + ", Password: " + password;
     }
 
-    public int getUserID() {
-        return userID;
+    @Override
+    public void update(Subscription.Observable subscription) {
+
     }
 
+    @Override
     public String getName() {
         return name;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public HashMap<String, Subscription> getSubscriptionList() {
+    @Override
+    public HashMap<String, String> getSubscriptionList() {
         return subscriptionList;
     }
-    public Subscription getSubscription(String websiteName) {
-        return subscriptionList.get(websiteName);
+
+    @Override
+    public void addSubscriptionToUser(String subscriptionName, String subscriptionUrl) {
+        subscriptionList.put(subscriptionName, subscriptionUrl);
+    }
+    @Override
+    public void deleteSubscriptionFromUser(String subscriptionName) {
+        subscriptionList.remove(subscriptionName);
+    }
+
+    @Override
+    public String getPassword() {
+        return password;
     }
 
 }

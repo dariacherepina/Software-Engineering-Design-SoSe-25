@@ -1,15 +1,17 @@
-import java.util.HashMap;
-import java.util.Scanner;
+import Subscription.Subscription;
+import Subscription.Website;
+import Subscription.Notification;
+import Subscription.Observable;
+import  Subscription.Observer;
+
+import java.util.*;
 
 public class UserServiceHandler {
-    private static HashMap<String, User> userList = new HashMap();
+    private static HashMap<String, Observable> subscriptionList = new HashMap<String, Observable>();
+    private static HashMap<String, Observer> userList = new HashMap<String, Observer>();
 
-    public static String addUser(User user){
-        userList.put(user.getName(), user);
-        return user.getName();
-    }
 
-    public static User createUser(){
+    public static Observer createUser(){
         Scanner myObj = new Scanner(System.in);  // Create a Scanner object
         while (true){
             System.out.println("Enter your username: ");
@@ -23,24 +25,24 @@ public class UserServiceHandler {
             System.out.println("Repeat your password: ");
             String passwordRepeat = myObj.nextLine();
             if(password.equals(passwordRepeat)){
-                User person = new User(username, password);
-                addUser(person);
+                Observer person = new User(username, password);
+                userList.put(person.getName(), person);
+                person.getName();
                 return person;
             }else{
                 System.out.println("Passwords do not match\n Try again ....");
             }
         }
     }
-
-    public static User logIn(){
+    public static Observer logIn(){
         Scanner myObj = new Scanner(System.in);
         System.out.println("Enter your username: ");
         String username = myObj.nextLine();
-        User currentUser = userList.get(username);
+        Observer currentUser = userList.get(username);
         while (true){
             System.out.println("Enter your password: ");
             String password = myObj.nextLine();
-            if(currentUser.getPassword().equals(password)){
+            if( currentUser.getPassword().equals(password)){
                 return currentUser;
             }else{
                 System.out.println("Passwords do not match\n Try again ....");
@@ -48,7 +50,6 @@ public class UserServiceHandler {
         }
 
     }
-
     public static Website getWebsiteFromInput(){
         Scanner myObj = new Scanner(System.in);
         System.out.println("What is the name of the Website?");
@@ -75,26 +76,44 @@ public class UserServiceHandler {
                 notificationChannel = "terminal";
             }
         }
-        return new Notification(frequency, notificationChannel) {
-        };
+        return new Notification(frequency, notificationChannel);
+    }
+    public static void addSubscription(Observer currentUser){
+        Website site = getWebsiteFromInput();
+        Notification note = getNotificationFromInput();
+        if (subscriptionList.containsKey(site.getWebsiteName())){
+            // If the object Subscription was already created then we just add User
+            subscriptionList.get(site.getWebsiteName()).attach(currentUser);
+        }else{
+            // If not, we create new Subscription
+            Subscription currentSubscription = new Subscription(site, note);
+            // Add it to the User
+            currentSubscription.attach(currentUser);
+            // Adding it to the list of all Subscriptions
+            subscriptionList.put(site.getWebsiteName(), currentSubscription);
+        }
+        currentUser.addSubscriptionToUser(site.getWebsiteName(), site.getURL());
+        System.out.println("Subscription.Subscription added successfully.");
+        System.out.println(subscriptionList.toString());
+        System.out.println(userList.toString());
+    }
+    public static void deleteSubscription(Observer currentUser){
+        Scanner myObj = new Scanner(System.in);
+        System.out.println("What subscription do you want to delete");
+        String subscriptionNameToDelete = myObj.nextLine();
+        for (String nameOfSubscription : subscriptionList.keySet()){
+            if(Objects.equals(nameOfSubscription, subscriptionNameToDelete)){
+                subscriptionList.get(nameOfSubscription).detach(currentUser);
+                currentUser.deleteSubscriptionFromUser(subscriptionNameToDelete);
+            }
+        }
+        System.out.println(subscriptionList.toString());
+        System.out.println(userList.toString());
+        System.out.println(currentUser.getSubscriptionList().toString());
     }
 
-    public static void followSubscriptions(User currentUser){
-        HashMap<String, Subscription> currentSubscriptions = currentUser.getSubscriptionList();
-        System.out.println("Starting notifications for your subscriptions:");
-        for (String websiteName : currentSubscriptions.keySet()) {
-            Website currentWebsite = currentSubscriptions.get(websiteName).getWebsite();
-            int currentFrequency = currentSubscriptions.get(websiteName).getNotification().getFrequency();
-            System.out.println("▶ Starting notifier for: " + websiteName + " every " + currentFrequency + " minutes.");
-
-            Notifier notifier = new Notifier(currentWebsite, currentFrequency);
-            notifier.start(); // Correct usage because Notifier extends Thread
-        }
-        }
-
-
     public static void main(String[] args) {
-        //First level of program
+        //Create User Object
         loginLoop:
         while (true) {
             Scanner myObj = new Scanner(System.in);
@@ -106,15 +125,10 @@ public class UserServiceHandler {
             String userActionStart = myObj.nextLine();
 
             System.out.println("Action is: " + userActionStart);
-            User currentUser = null;
-            boolean createdAccount = false;
+            Observer currentUser = null;
             switch (userActionStart) {
-                case "1" -> {
-                    currentUser = createUser();
-                }
-                case "2" -> {
-                    currentUser = logIn();
-                }
+                case "1" -> currentUser = createUser();
+                case "2" -> currentUser = logIn();
                 case "3" -> {
                     System.out.println("Goodbye!");
                     break loginLoop;
@@ -127,45 +141,37 @@ public class UserServiceHandler {
 
             subscriptionLoop:
             while (true) {
-                if (!currentUser.getSubscriptionList().isEmpty()) {
-                    followSubscriptions(currentUser);
-                }else {
+                Set<String> currentSubscriptions =
+                        (currentUser.getSubscriptionList() != null)
+                                ? currentUser.getSubscriptionList().keySet()
+                                : new HashSet<>();
+                if (currentSubscriptions.isEmpty()){
                     System.out.println("You have no subscriptions yet. Let's add one.");
-                    Website site = getWebsiteFromInput();
-                    Notification note = getNotificationFromInput();
-                    currentUser.addSubscription(site, note);
-                    System.out.println("Subscription added successfully.");
-                    followSubscriptions(currentUser);
-                }
-                System.out.println("Hey " + currentUser.getName());
-                System.out.println("What do you want to do today?\n" +
-                        "1. Add Subscriptions?\n" +
-                        "2. Cancel Subscription?\n" +
-                        "3. List Subscriptions?\n" +
-                        "4. Log out\n");
-                String userActionSubscription = myObj.nextLine();
-                switch (userActionSubscription) {
-                    case "1" -> {
-                        Website site = UserServiceHandler.getWebsiteFromInput();
-                        Notification note = UserServiceHandler.getNotificationFromInput();
-                        currentUser.addSubscription(site, note);
-                        System.out.println("Subscription was added successfully");
-                    }
-                    case "2" -> {
-                        System.out.println("What is the name of the website you want to stop following?");
-                        String websiteName = myObj.nextLine();
-                        currentUser.cancelSubscription(websiteName);
-                        System.out.println("Subscription was canceled successfully");
-                    }
-                    case "3" -> {
-                        HashMap<String, Subscription> currentSubscriptions = currentUser.getSubscriptionList();
-                        System.out.println(currentSubscriptions.keySet());
-                    }
-                    case "4" -> {
-                        break subscriptionLoop;
-                                         }
-                    default -> {
-                        System.out.println("Invalid option. Please enter 1 or 2.");
+                    addSubscription(currentUser);
+                }else{
+                    System.out.println("Do you want to " +
+                            "\n1. Add subscription" +
+                            "\n2. Delete subscription" +
+                            "\n3. Check the Subscriptions" +
+                            "\n4. Go back");
+                    int choice = myObj.nextInt();
+                    System.out.println("\n###Your subscriptions are " + String.join(", ", currentSubscriptions) + "###");
+                    switch (choice){
+                        case 1 -> {
+                            addSubscription(currentUser);
+                        }
+                        case 2 -> {
+                            deleteSubscription(currentUser);
+                        }
+                        case 3 -> {
+                            for (Observable subscription : subscriptionList.values()) {
+                                    subscription.notifyObservers();
+                            }
+                        }
+                        case 4 -> {
+                            System.out.println("Going back...");
+                            break subscriptionLoop;
+                        }
                     }
                 }
             }

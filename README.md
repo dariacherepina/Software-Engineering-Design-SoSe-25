@@ -7,3 +7,10 @@ Exercises:
 Friday, 8:15-9:45
 1.236	VGU/Mobile Applications
 Prof. Dr. Robert Lokaiczyk
+
+
+Test data:
+
+https://www.geeksforgeeks.org/
+https://www.google.com/
+https://www.w3schools.com/

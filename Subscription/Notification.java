@@ -1,4 +1,8 @@
-import java.util.Date;
+package Subscription;
+
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.concurrent.TimeUnit;
 
 public class  Notification{
     private int frequency;
@@ -12,16 +16,21 @@ public class  Notification{
 
     @Override
     public String toString() {
-        return "Notification{" +
+        return "Subscription.Subscription.Subscription.Subscription.Notification{" +
                 "frequency=" + frequency +
                 ", notificationChannel='" + notificationChannel + '\'' +
                 ", status=" + status +
                 '}';
     }
 
-    public void sendNotification(String message) {
-
-        System.out.println("Sending notification ...");
+    public void sendNotification() {
+        Timer timer = new Timer();
+        timer.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                System.out.println("Notification sent to " + notificationChannel);
+            }
+        }, 0, TimeUnit.MINUTES.toMillis(frequency));
     }
 
     public int getFrequency() {
@@ -30,9 +39,5 @@ public class  Notification{
 
     public String getNotificationChannel() {
         return notificationChannel;
-    }
-
-    public boolean isStatus() {
-        return status;
     }
 }
