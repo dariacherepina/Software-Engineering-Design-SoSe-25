@@ -25,7 +25,8 @@ public class UserServiceHandler {
             System.out.println("Repeat your password: ");
             String passwordRepeat = myObj.nextLine();
             if(password.equals(passwordRepeat)){
-                Observer person = new User(username, password);
+                Notification note = getNotificationFromInput();
+                Observer person = new User(username, password, note);
                 userList.put(person.getName(), person);
                 person.getName();
                 return person;
@@ -80,13 +81,12 @@ public class UserServiceHandler {
     }
     public static void addSubscription(Observer currentUser){
         Website site = getWebsiteFromInput();
-        Notification note = getNotificationFromInput();
         if (subscriptionList.containsKey(site.getWebsiteName())){
             // If the object Subscription was already created then we just add User
             subscriptionList.get(site.getWebsiteName()).attach(currentUser);
         }else{
             // If not, we create new Subscription
-            Subscription currentSubscription = new Subscription(site, note);
+            Subscription currentSubscription = new Subscription(site);
             // Add it to the User
             currentSubscription.attach(currentUser);
             // Adding it to the list of all Subscriptions

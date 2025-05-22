@@ -6,13 +6,11 @@ public class Subscription implements Observable {
     private static int idCounter = 0;
     private int subscriptionID;
     private Website website;
-    private Notification notification;
     private ArrayList<Observer> observersList = new ArrayList<>();
 
-    public Subscription(Website website, Notification notification) {
+    public Subscription(Website website) {
         this.subscriptionID = ++idCounter;
         this.website = website;
-        this.notification = notification;
     }
 
     @Override
@@ -29,9 +27,8 @@ public class Subscription implements Observable {
     @Override
     public void notifyObservers() {
         for (Observer observer : observersList) {
-            notification.sendNotification();
+            observer.update();
         }
-
     }
 
     @Override
@@ -39,7 +36,6 @@ public class Subscription implements Observable {
         return "Subscribtion{" +
                 "subscriptionID=" + subscriptionID +
                 ", website=" + website +
-                ", notification=" + notification +
                 '}';
     }
 

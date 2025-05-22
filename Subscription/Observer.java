@@ -3,7 +3,7 @@ package Subscription;
 import java.util.HashMap;
 
 public interface Observer {
-    void update(Observable subscription);
+    void update();
     Object getPassword();
     String getName();
     HashMap<String, String> getSubscriptionList();

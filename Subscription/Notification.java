@@ -7,7 +7,6 @@ import java.util.concurrent.TimeUnit;
 public class  Notification{
     private int frequency;
     private String notificationChannel;
-    private boolean status;
 
     public Notification(int frequency, String notificationChannel) {
         this.frequency = frequency;
@@ -19,7 +18,6 @@ public class  Notification{
         return "Subscription.Subscription.Subscription.Subscription.Notification{" +
                 "frequency=" + frequency +
                 ", notificationChannel='" + notificationChannel + '\'' +
-                ", status=" + status +
                 '}';
     }
 
