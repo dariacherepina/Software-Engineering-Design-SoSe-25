@@ -1,9 +1,7 @@
-package Subscription;
-
 import java.util.HashMap;
 
 public interface Observer {
-    void update();
+    void update(Notification notification);
     Object getPassword();
     String getName();
     HashMap<String, String> getSubscriptionList();

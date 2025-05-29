@@ -1,39 +1,30 @@
-import Subscription.Notification;
-import Subscription.Observer;
-import Subscription.Observable;
-
-import java.sql.Time;
 import java.time.LocalTime;
 import java.util.HashMap;
 
+
+//ConcreteObserver
 public class User implements Observer {
     private static int idCounter = 0;
     private int userID;
     private String name;
     private String password;
-    private Notification notification;
     private HashMap<String, String> subscriptionList = new HashMap<>();
-    private LocalTime lastUpdateTime;
 
 
-    public User(String name, String password, Notification notification) {
+    public User(String name, String password) {
         this.userID = ++idCounter;
         this.name = name;
         this.password = password;
-        this.notification = notification;
-        //this.subscriptionList = new HashMap<>();
     }
 
     @Override
     public String toString() {
         return "Name: " + name +
-                ", Password: " + password +
-                ", notification=" + notification;
+                ", Password: " + password;
     }
 
     @Override
-    public void update() {
-        lastUpdateTime = LocalTime.now();
+    public void update(Notification notification) {
         notification.sendNotification();
     }
 

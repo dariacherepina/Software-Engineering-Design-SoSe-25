@@ -7,7 +7,7 @@ You have to register first, and then you can add subscriptions and the time in s
 ![img.png](img.png)
 
 ### Suggest a package structure for your implementation. 
-I would put Subscription.Subscription, Subscription.Subscription.Website and Subscription.Subscription.Subscription.Subscription.Notification in one package, UserServiceHandler and Notifier in other one, and User in separate one.
+I would put Subscription, Website and Notification in one package, UserServiceHandler and Notifier in other one, and User in separate one.
 
 ### Name options to reduce coupling between your packages.
 It can be GRASP principle, that we already learned. Or for example Factory/Builder Patterns

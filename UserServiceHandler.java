@@ -1,22 +1,22 @@
-import Subscription.Subscription;
-import Subscription.Website;
-import Subscription.Notification;
-import Subscription.Observable;
-import  Subscription.Observer;
+import Comparison.ComparisonStrategy;
+import Comparison.ExactHtmlComparisonStrategy;
+import Comparison.SizeComparisonStrategy;
+import Comparison.TextOnlyComparisonStrategy;
 
 import java.util.*;
 
 public class UserServiceHandler {
-    private static HashMap<String, Observable> subscriptionList = new HashMap<String, Observable>();
-    private static HashMap<String, Observer> userList = new HashMap<String, Observer>();
+    static HashMap<String, Subject> websites = new HashMap<String, Subject>();
+    private static HashMap<String, Observer> users = new HashMap<String, Observer>();
+    private static Observer currentUser = null;
 
 
     public static Observer createUser(){
-        Scanner myObj = new Scanner(System.in);  // Create a Scanner object
+        Scanner myObj = new Scanner(System.in);
         while (true){
             System.out.println("Enter your username: ");
             String username = myObj.nextLine();
-            if(userList.containsKey(username)){
+            if(users.containsKey(username)){
                 System.out.println("That username is already in use! Try again...");
                 continue;
             }
@@ -25,9 +25,8 @@ public class UserServiceHandler {
             System.out.println("Repeat your password: ");
             String passwordRepeat = myObj.nextLine();
             if(password.equals(passwordRepeat)){
-                Notification note = getNotificationFromInput();
-                Observer person = new User(username, password, note);
-                userList.put(person.getName(), person);
+                Observer person = new User(username, password);
+                users.put(person.getName(), person);
                 person.getName();
                 return person;
             }else{
@@ -35,11 +34,12 @@ public class UserServiceHandler {
             }
         }
     }
-    public static Observer logIn(){
+
+    private static Observer loginUser(){
         Scanner myObj = new Scanner(System.in);
         System.out.println("Enter your username: ");
         String username = myObj.nextLine();
-        Observer currentUser = userList.get(username);
+        Observer currentUser = users.get(username);
         while (true){
             System.out.println("Enter your password: ");
             String password = myObj.nextLine();
@@ -51,15 +51,8 @@ public class UserServiceHandler {
         }
 
     }
-    public static Website getWebsiteFromInput(){
-        Scanner myObj = new Scanner(System.in);
-        System.out.println("What is the name of the Website?");
-        String websiteName = myObj.nextLine();
-        System.out.println("What is the URL  for the Website?");
-        String url = myObj.nextLine();
-        return new Website(websiteName, url);
-    }
-    public static Notification getNotificationFromInput(){
+
+    private static Notification getNotificationFromInput(){
         Scanner myObj = new Scanner(System.in);
         System.out.println("What is the frequency you'd like to receive notifications?( in min )");
         int frequency = myObj.nextInt();
@@ -79,103 +72,161 @@ public class UserServiceHandler {
         }
         return new Notification(frequency, notificationChannel);
     }
-    public static void addSubscription(Observer currentUser){
+
+    private static Website getWebsiteFromInput(){
+        Scanner myObj = new Scanner(System.in);
+        System.out.println("What is the name of the Website?");
+        String websiteName = myObj.nextLine();
+        System.out.println("What is the URL  for the Website?");
+        String url = myObj.nextLine();
+        Notification notification = getNotificationFromInput();
+        System.out.println("\nSelect comparison strategy:");
+        System.out.println("1. Content size comparison");
+        System.out.println("2. Exact HTML comparison");
+        System.out.println("3. Text-only comparison");
+        int strategyChoice = myObj.nextInt();
+
+        ComparisonStrategy strategy;
+        switch (strategyChoice) {
+            case 1 -> strategy = new SizeComparisonStrategy();
+            case 2 -> strategy = new ExactHtmlComparisonStrategy();
+            case 3 -> strategy = new TextOnlyComparisonStrategy();
+            default -> strategy = new ExactHtmlComparisonStrategy();
+        }
+        return new Website(websiteName, url, notification, strategy);
+    }
+
+    private static void addSubscription(){
         Website site = getWebsiteFromInput();
-        if (subscriptionList.containsKey(site.getWebsiteName())){
+        if (websites.containsKey(site.getWebsiteName())){
             // If the object Subscription was already created then we just add User
-            subscriptionList.get(site.getWebsiteName()).attach(currentUser);
+            websites.get(site.getWebsiteName()).attach(currentUser);
         }else{
-            // If not, we create new Subscription
-            Subscription currentSubscription = new Subscription(site);
-            // Add it to the User
-            currentSubscription.attach(currentUser);
-            // Adding it to the list of all Subscriptions
-            subscriptionList.put(site.getWebsiteName(), currentSubscription);
+            // If not, add the User to it
+            site.attach(currentUser);
+            // We add the Website to the list
+            websites.put(site.getWebsiteName(), site);
         }
         currentUser.addSubscriptionToUser(site.getWebsiteName(), site.getURL());
-        System.out.println("Subscription.Subscription added successfully.");
-        System.out.println(subscriptionList.toString());
-        System.out.println(userList.toString());
+        System.out.println("Subscription added successfully.");
+        System.out.println(websites.toString());
+        System.out.println(users.toString());
     }
-    public static void deleteSubscription(Observer currentUser){
+
+    private static void deleteSubscription(){
         Scanner myObj = new Scanner(System.in);
         System.out.println("What subscription do you want to delete");
         String subscriptionNameToDelete = myObj.nextLine();
-        for (String nameOfSubscription : subscriptionList.keySet()){
+        for (String nameOfSubscription : websites.keySet()){
             if(Objects.equals(nameOfSubscription, subscriptionNameToDelete)){
-                subscriptionList.get(nameOfSubscription).detach(currentUser);
+                websites.get(nameOfSubscription).detach(currentUser);
                 currentUser.deleteSubscriptionFromUser(subscriptionNameToDelete);
             }
         }
-        System.out.println(subscriptionList.toString());
-        System.out.println(userList.toString());
+        System.out.println(websites.toString());
+        System.out.println(users.toString());
         System.out.println(currentUser.getSubscriptionList().toString());
     }
 
-    public static void main(String[] args) {
-        //Create User Object
-        loginLoop:
-        while (true) {
-            Scanner myObj = new Scanner(System.in);
-            System.out.println("Choose action: \n" +
-                    "1. Register\n" +
-                    "2. Log in\n" +
-                    "3. Exit\n" +
-                    "Your action:");
-            String userActionStart = myObj.nextLine();
+    private static void listSubscriptions() {
+        System.out.println("\n=== Your Subscriptions ===");
+        HashMap<String, String> subs = currentUser.getSubscriptionList();
 
+        if (subs.isEmpty()) {
+            System.out.println("You have no subscriptions.");
+        } else {
+            subs.forEach((name, url) -> {
+                System.out.println("- " + name + " (" + url + ")");
+                System.out.println("  Notification: " + websites.get(name).getNotification() );
+                System.out.println("  Strategy: " + websites.get(name).getComparisonStrategy());
+            });
+        }
+    }
+
+    private static void checkAllWebsites() {
+        System.out.println("\n=== Checking Websites for Updates ===");
+        HashMap<String, String> subs = currentUser.getSubscriptionList();
+
+        if (subs.isEmpty()) {
+            System.out.println("You have no subscriptions to check.");
+            return;
+        }
+
+        subs.forEach((name, url) -> {
+            for (Subject website : websites.values()) {
+                if (website.getWebsiteName().equals(name)) {
+                    String result = website.checkContent();
+                    website.notifyObservers(result);
+                    break;
+                }
+            }
+        });
+    }
+
+    private static void logout() {
+        System.out.println("Goodbye, " + currentUser.getName() + "!");
+        currentUser = null;
+    }
+
+    private static void showMainMenu() {
+        System.out.println("\n=== Website Monitoring System ===");
+        System.out.println("1. Register");
+        System.out.println("2. Login");
+        System.out.println("3. Exit");
+    }
+
+    private static void showUserMenu() {
+        System.out.println("\n=== Welcome, " + currentUser.getName() + " ===");
+        System.out.println("1. List my subscriptions");
+        System.out.println("2. Add subscription");
+        System.out.println("3. Remove subscription");
+        System.out.println("4. Check all websites for updates");
+        System.out.println("5. Logout");
+        System.out.println("6. Exit");
+    }
+
+    public static void main(String[] args) {
+        Scanner myObj = new Scanner(System.in);
+        //Create User Object
+        boolean runningLogin = true;
+        while (runningLogin) {
+            showMainMenu();
+            String userActionStart = myObj.nextLine();
             System.out.println("Action is: " + userActionStart);
-            Observer currentUser = null;
             switch (userActionStart) {
                 case "1" -> currentUser = createUser();
-                case "2" -> currentUser = logIn();
-                case "3" -> {
-                    System.out.println("Goodbye!");
-                    break loginLoop;
-                }
+                case "2" -> currentUser = loginUser();
+                case "3" -> runningLogin = false;
                 default -> {
                     System.out.println("Invalid option. Try again.");
                     continue;
                 }
             }
 
-            subscriptionLoop:
-            while (true) {
+            boolean runningSubscription = true;
+            while (runningSubscription) {
                 Set<String> currentSubscriptions =
                         (currentUser.getSubscriptionList() != null)
                                 ? currentUser.getSubscriptionList().keySet()
                                 : new HashSet<>();
                 if (currentSubscriptions.isEmpty()){
                     System.out.println("You have no subscriptions yet. Let's add one.");
-                    addSubscription(currentUser);
+                    addSubscription();
                 }else{
-                    System.out.println("Do you want to " +
-                            "\n1. Add subscription" +
-                            "\n2. Delete subscription" +
-                            "\n3. Check the Subscriptions" +
-                            "\n4. Go back");
+                    showUserMenu();
                     int choice = myObj.nextInt();
                     System.out.println("\n###Your subscriptions are " + String.join(", ", currentSubscriptions) + "###");
-                    switch (choice){
-                        case 1 -> {
-                            addSubscription(currentUser);
-                        }
-                        case 2 -> {
-                            deleteSubscription(currentUser);
-                        }
-                        case 3 -> {
-                            for (Observable subscription : subscriptionList.values()) {
-                                    subscription.notifyObservers();
-                            }
-                        }
-                        case 4 -> {
-                            System.out.println("Going back...");
-                            break subscriptionLoop;
-                        }
+                    switch (choice) {
+                        case 1 -> listSubscriptions();
+                        case 2 -> addSubscription();
+                        case 3 -> deleteSubscription();
+                        case 4 -> checkAllWebsites();
+                        case 5 -> logout();
+                        case 6 -> runningSubscription = false;
                     }
                 }
             }
-
         }
     }
 }
+
