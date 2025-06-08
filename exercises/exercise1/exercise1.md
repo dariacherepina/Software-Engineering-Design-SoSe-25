@@ -16,14 +16,14 @@
    - Integrated Terminal: Most IDEs come with a built-in terminal for running scripts or commands directly from the development environment.
    - Unit Testing Support: Integrated testing frameworks within IDEs allow you to write, run, and debug unit tests directly from the development environment, streamlining the testing process.
    - Task Management Integration: Many IDEs integrate with project management tools (like Jira or Trello), enabling developers to track tasks and bugs directly within the IDE.
-### 2. Prove that the exercise1.Ulam function defined as
+### 2. Prove that the exercises.exercise1.Ulam function defined as
 1. Start with a positive integer n.
 2. If n is even, divide it by 2.
 3. If n is odd, multiply it by 3 and add 1.
 4. Repeat steps 2 and 3 with the resulting number.
    terminates with 1 for any given positive integer n<1M.
 
-*Look exercise1.Ulam.java file*
+*Look exercises.exercise1.Ulam.java file*
 
 ### 3. Create a gitHub.com account and commit your software to a new repository.
 https://github.com/dariacherepina/Software-Engineering-Design-SoSe-25.git
@@ -37,7 +37,7 @@ https://github.com/dariacherepina/Software-Engineering-Design-SoSe-25.git
 ### 5. Draw a UML class diagram for a class developer with at least 5 suitable attributes and 5 methods. 
 Draw an object diagram with corresponding values for yourself. Implement this class in Java with integrity checks in the setter methods.
 ![img_2.png](img_2.png)
-*Look into exercise1.Developer.java file* 
+*Look into exercises.exercise1.Developer.java file* 
 
 ### 6. Define the term software design. Explain how this differs from software analysis. 
 The design phase of software development deals with transforming the customer requirements as described in the SRS documents into a form implementable using a programming language.

@@ -6,12 +6,12 @@ import Comparison.TextOnlyComparisonStrategy;
 import java.util.*;
 
 public class UserServiceHandler {
-    static HashMap<String, Subject> websites = new HashMap<String, Subject>();
-    private static HashMap<String, Observer> users = new HashMap<String, Observer>();
-    private static Observer currentUser = null;
+    static HashMap<String, ISubject> websites = new HashMap<String, ISubject>();
+    private static HashMap<String, IObserver> users = new HashMap<String, IObserver>();
+    private static IObserver currentUser = null;
 
 
-    public static Observer createUser(){
+    public static IObserver createUser(){
         Scanner myObj = new Scanner(System.in);
         while (true){
             System.out.println("Enter your username: ");
@@ -25,7 +25,7 @@ public class UserServiceHandler {
             System.out.println("Repeat your password: ");
             String passwordRepeat = myObj.nextLine();
             if(password.equals(passwordRepeat)){
-                Observer person = new User(username, password);
+                IObserver person = new User(username, password);
                 users.put(person.getName(), person);
                 person.getName();
                 return person;
@@ -35,11 +35,11 @@ public class UserServiceHandler {
         }
     }
 
-    private static Observer loginUser(){
+    private static IObserver loginUser(){
         Scanner myObj = new Scanner(System.in);
         System.out.println("Enter your username: ");
         String username = myObj.nextLine();
-        Observer currentUser = users.get(username);
+        IObserver currentUser = users.get(username);
         while (true){
             System.out.println("Enter your password: ");
             String password = myObj.nextLine();
@@ -153,7 +153,7 @@ public class UserServiceHandler {
         }
 
         subs.forEach((name, url) -> {
-            for (Subject website : websites.values()) {
+            for (ISubject website : websites.values()) {
                 if (website.getWebsiteName().equals(name)) {
                     String result = website.checkContent();
                     website.notifyObservers(result);

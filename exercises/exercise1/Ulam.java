@@ -1,4 +1,4 @@
-package exercise1;
+package exercises.exercise1;
 
 
 public class Ulam {

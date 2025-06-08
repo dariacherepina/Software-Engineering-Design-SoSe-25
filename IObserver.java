@@ -1,6 +1,6 @@
 import java.util.HashMap;
 
-public interface Observer {
+public interface IObserver {
     void update(Notification notification);
     Object getPassword();
     String getName();

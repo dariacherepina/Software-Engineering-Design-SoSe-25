@@ -2,12 +2,12 @@ import Comparison.ComparisonStrategy;
 
 import java.util.ArrayList;
 
-public interface Subject {
-    void attach(Observer observer);
-    void detach(Observer observer);
+public interface ISubject {
+    void attach(IObserver IObserver);
+    void detach(IObserver IObserver);
     void notifyObservers(String message);
     String getState();
-    ArrayList<Observer> getObserversList();
+    ArrayList<IObserver> getObserversList();
     Notification getNotification();
     String getWebsiteName();
     String checkContent();

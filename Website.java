@@ -9,14 +9,14 @@ import java.net.URL;
 import java.util.ArrayList;
 
 //ConcreteSubject
-public class Website implements Subject {
+public class Website implements ISubject {
     private String websiteName;
     private String urlString;
     private Notification notification;
     private String state;
     private LocalDate  lastCheckedDate;
     private StringBuilder content = new StringBuilder();
-    private ArrayList<Observer> observersList = new ArrayList<>();
+    private ArrayList<IObserver> observersList = new ArrayList<>();
     private ComparisonStrategy comparisonStrategy;
 
     public ComparisonStrategy getComparisonStrategy() {
@@ -42,20 +42,20 @@ public class Website implements Subject {
                 '}';
     }
     @Override
-    public void attach(Observer observer) {
-        observersList.add(observer);
+    public void attach(IObserver IObserver) {
+        observersList.add(IObserver);
     }
 
     @Override
-    public void detach(Observer observer) {
-        observersList.remove(observer);
+    public void detach(IObserver IObserver) {
+        observersList.remove(IObserver);
     }
 
 
     @Override
     public void notifyObservers(String message) {
-        for (Observer observer : observersList) {
-            observer.update(notification);
+        for (IObserver IObserver : observersList) {
+            IObserver.update(notification);
         }
     }
 
@@ -111,7 +111,7 @@ public class Website implements Subject {
     }
 
 
-    public ArrayList<Observer> getObserversList() {
+    public ArrayList<IObserver> getObserversList() {
         return observersList;
     }
 

@@ -1,9 +1,8 @@
-import java.time.LocalTime;
 import java.util.HashMap;
 
 
 //ConcreteObserver
-public class User implements Observer {
+public class User implements IObserver {
     private static int idCounter = 0;
     private int userID;
     private String name;
