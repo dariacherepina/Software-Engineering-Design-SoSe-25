@@ -42,4 +42,4 @@ Amazon SimpleDB	Tracks job status, comparison strategy, notification preferences
 
 A user provides a URL, comparison strategy, and notification preferences. This data is stored in SimpleDB, and a job request is queued in SQS.
 
-
+![img.png](img.png)
