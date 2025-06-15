@@ -2,6 +2,18 @@
 
 The shift from mainframes to cloud computing happened due to advancements in internet technology, cost efficiency, and scalability needs. Mainframes were expensive and inflexible, while the cloud offered pay-as-you-go pricing, global accessibility, and elastic resources. Additionally, the rise of distributed systems, virtualization, and demand for faster innovation made cloud computing the preferred choice for modern businesses.
 
+
+Cloud:
+- Not owning, but renting
+- Rapid elasticity and scalability 
+- Pay as you go
+- Parallelization
+
+Mainframe:
+- Batch Processing 
+- Limited Access
+- Centralised Data 
+- Upfront cost 
 ### ***Read the paper Varia - Cloud Architectures.pdf pages (see CampUAS). Summarise the advantages of this architectures compared to you implementation from exercise 6.***
 1. "Use Scalable Ingredients"
 While in my code I use Single-machine execution, in cloud computing it would be massively scalable.
@@ -22,6 +34,7 @@ I have single-threaded content checks. In could it could be multi-node processin
 5. Loose Coupling
 In my code i user IObserver pattern, which decouples Website and User. In could SQS queues decouple components (Launch, Monitor, Shutdown).
 
+6. Broad network access 
 AWS:
 - Amazon S3 acts as an input as well as an output data store.
 - Amazon SQS was used as message-passing mechanism between components. It also  acts as a transient buffer between two components (controllers).
