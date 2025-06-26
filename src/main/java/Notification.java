@@ -1,10 +1,6 @@
-import java.util.Timer;
-import java.util.TimerTask;
-import java.util.concurrent.TimeUnit;
-
 public class  Notification{
-    private int frequency;
-    private String notificationChannel;
+    int frequency;
+    String notificationChannel;
     private String notificationMessage;
 
     public Notification(int frequency, String notificationChannel) {

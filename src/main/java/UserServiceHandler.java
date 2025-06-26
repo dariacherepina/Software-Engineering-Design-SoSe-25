@@ -7,8 +7,8 @@ import java.util.*;
 
 public class UserServiceHandler {
     static HashMap<String, ISubject> websites = new HashMap<String, ISubject>();
-    private static HashMap<String, IObserver> users = new HashMap<String, IObserver>();
-    private static IObserver currentUser = null;
+    static HashMap<String, IObserver> users = new HashMap<String, IObserver>();
+    static IObserver currentUser = null;
 
 
     public static IObserver createUser(){

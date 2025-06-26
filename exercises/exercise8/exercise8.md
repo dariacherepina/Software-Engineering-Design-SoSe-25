@@ -17,7 +17,7 @@ c.
 Continuous Integration (CI) is a DevOps practice where developers merge code changes into a shared repository multiple times a day.
 Each integration triggers automated builds and tests to catch bugs early and ensure code stability.
 It does not automatically deploy to production (that’s Continuous Delivery/Deployment).
-While Docker containers (option d) can be part of CI, they’re not its main purpose.
+While Docker containers (option d) can be part of CI, they’re not its test purpose.
 
 
 3.

@@ -81,6 +81,6 @@ https://drive.google.com/file/d/1WIX7i4dUR_-jsKDzNALM21SidxNKzSat/view?usp=shari
 
 *b) A video conferencing system: I would choose client-server architecture, mainly because it would manage room creation, authentication, and media routing through a central server.*
 
-*c) A GPS tracker for cats: It could be either Even-driven architecture or IOT architecture. In even driven one the main point is to get messages(events) where the cat currently is, this would also keep it lightweight.* 
+*c) A GPS tracker for cats: It could be either Even-driven architecture or IOT architecture. In even driven one the test point is to get messages(events) where the cat currently is, this would also keep it lightweight.* 
 
 *In IOT architecture it would be implemented the following way: Edge Device (the collar) ➔ Cloud Backend ➔ Mobile/Web Frontend. That means we take the information(GPS location), send it to the cloud storage, and then we can send it to the frontend(mobile app), where the owners could check the location of the cat.*
