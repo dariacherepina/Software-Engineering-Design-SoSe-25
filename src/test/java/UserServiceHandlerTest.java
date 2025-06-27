@@ -14,7 +14,6 @@ class UserServiceHandlerTest {
 
     @Test
     void testCreateUser() {
-        // This would need to be mocked in a real test
         assertNotNull(UserServiceHandler.users.get("testUser"));
     }
 

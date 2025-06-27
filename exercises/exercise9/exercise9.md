@@ -16,6 +16,7 @@ A high backlog of defects slows down fixes for critical issues.
 - #### Higher Risk of Escalations: 
 Severe defects may require emergency patches or managerial involvement.
 
+Exponential collaboration between nr. of support hours and nr. of bugs 
 
 2. Give 5 arguments for and against developers testing their own programmes.
 
@@ -35,6 +36,20 @@ Severe defects may require emergency patches or managerial involvement.
 
 3. Create equivalence classes for testing the software from Exercise 6. Generate
    corresponding test cases. Implement them as unit tests.
+Think about edge testing:
+- content of the website changes 
+- content doesn't change 
+- download of the website fails 
+- different strategies 
+- what if the website is empty 
+- what if the server is not available 
+- what if url is not valid 
+
+import static org.junit.jupiter.api.Assertions.*; -> why static?
+
+When a member is declared static , it belongs to the class rather than instances of the class.
+That means that we can call it without the instance being created 
+
 4. What is regression testing?
 
 Regression testing is the process of re-running previously executed test cases on modified software to ensure that new changes (e.g., bug fixes, feature updates) do not introduce new defects or break existing functionality.
@@ -48,6 +63,7 @@ Prevents "one fix breaks another" scenarios. Ensures software stability after up
 #### Black Box Testing:
 is a software testing method where the internal structure, design, and implementation of the system are not known to the tester. The tester interacts with the software solely through its inputs and outputs, treating it as a "black box."
 
+Example: beta testing, ui/ux testing 
 
 Use:
 - Validating requirements
@@ -65,6 +81,7 @@ Con:
 #### White Box Testing
 is a method where the tester examines the internal code structure, logic, and implementation of the software to design test cases.
 
+Example: unit test 
 
 Use: 
 - Ensuring all code paths are tested

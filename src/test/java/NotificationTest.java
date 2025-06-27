@@ -18,7 +18,6 @@ class NotificationTest {
     @Test
     void testSendNotification() {
         notification.setNotificationMessage("Test message");
-        // This just tests that no exception is thrown
         assertDoesNotThrow(() -> notification.sendNotification());
     }
 }
