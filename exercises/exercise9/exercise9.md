@@ -63,7 +63,9 @@ Prevents "one fix breaks another" scenarios. Ensures software stability after up
 #### Black Box Testing:
 is a software testing method where the internal structure, design, and implementation of the system are not known to the tester. The tester interacts with the software solely through its inputs and outputs, treating it as a "black box."
 
-Example: beta testing, ui/ux testing 
+Example: 
+- beta testing: an opportunity for real users to use a product in a production environment to uncover any bugs or issues before a general release. Beta testing is the final round of testing before releasing a product to a wide audience.
+- ui/ux testing 
 
 Use:
 - Validating requirements
