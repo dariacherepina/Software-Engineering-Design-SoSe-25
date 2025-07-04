@@ -29,9 +29,39 @@ Deployment
 - App Store / AR glasses platform launch
 
 ![img.png](img.png)
+In the gantt chart you can decide weather the task could be parallelized or are they dependent on each other.
+
+Completion grade column to track the result.
+
+The vertical line can indicate the current date to realise where are you in the gantt chart.
+
 2. Estimate the costs of this project and explain your rationale. For which price
    would you sell your software for? Explain why.
 
+#### Freemium:
+free version, but for specific  stuff is paid
+
+#### Change Request:
+when you have defined requirements and set price, but with any new features product owner creates CR and you will be paid for new feature as well.
+
+#### Cost plus pricing 
+You estimate you costs and add margin 
+#### Competitive pricing
+Price based on the competitive pricing
+
+#### Price elasticity based pricing 
+For example : 0,39 * 2M = 800K
+               0,99 * 1M = 1M
+              6,99 * 0,5M = 3,5M
+With diffent price diffent amount of people will buy it
+
+#### Value- base pricing:
+if you know the value of your product for the person, you can charge for the value of how much you save the company money 
+
+#### Behavioral pricing:
+based on the location, time, targeted audience 
+
+#### AI pricing
 #### Development Costs
 - AR Developer : $15,000 - $25,000 -> Specialized AR devs charge $50-$100/hr
 - Game Developer: $10,000 - $20,000 -> Core gameplay + networking
